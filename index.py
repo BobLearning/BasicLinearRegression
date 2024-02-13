@@ -1,11 +1,31 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
-x = np.array([np.random.randint(10, size=10), np.random.randint(10, size=10), np.random.randint(10, size=10)])
+n = 20
+size = 10
+
+x = np.array([np.random.randint(n, size=size), np.random.randint(n, size=size), np.random.randint(n, size=size)])
+
 w = [0, 0, 0]
 b = 0
 
 y = np.array([x[0] * 5, x[1] * 9, x[2] * 12]) + 5
 
+
+def plot(w,b):
+    y_predict = x * w[0] + b
+    y_predict2 = x * w[1] + b
+    y_predict3 = x * w[2] + b
+
+    plt.plot(x, y, 'x')
+    plt.plot(x, y_predict)
+    plt.plot(x, y_predict2)
+    plt.plot(x, y_predict3)
+
+    plt.ylabel('Hours') 
+    plt.xlabel('Pass or Fail') 
+
+    plt.show()
 
 def cost_function(x, y, w, b):
     m = x.shape[0]
@@ -54,4 +74,6 @@ def gradient_descent(x, y, w, b, iterations, alpha):
     return w, b
 
 
-print(gradient_descent(x, y, w, b, 10000, 0.001))
+W,B = gradient_descent(x, y, w, b, 100000, 0.00001)
+
+plot(W,B)
